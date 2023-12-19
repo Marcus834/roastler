@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 
 interface SearchBarProps {
-  hidden: boolean
+  hidden?: boolean
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ hidden }) => {
