@@ -1,21 +1,18 @@
 import { useCallback } from "react"
-import { FaFeather } from "react-icons/fa"
 import { useRouter } from "next/router"
+import { IoIosMore } from "react-icons/io"
 
 import useLoginModal from "@/hooks/useLoginModal"
 import useCurrentUser from "@/hooks/useCurrentUser"
+import Avatar from "../Avatar"
 
-const SidebarTweetButton = () => {
+const SidebarProfileWidget = () => {
   const router = useRouter()
   const loginModal = useLoginModal()
   const { data: currentUser } = useCurrentUser()
 
   const onClick = useCallback(() => {
-    if (!currentUser) {
-      return loginModal.onOpen()
-    }
-
-    router.push("/")
+    router.push(`/users/${currentUser?.id}`)
   }, [loginModal, router, currentUser])
 
   return (
@@ -31,42 +28,46 @@ const SidebarTweetButton = () => {
         flex
         items-center
         justify-center 
-        bg-sky-500 
         hover:bg-opacity-80 
         transition 
         cursor-pointer
+        hover:bg-slate-300 
       "
       >
-        <FaFeather size={24} color="white" />
+        <div>
+          <Avatar userId={currentUser?.id} />
+        </div>
       </div>
       <div
         className="
         mt-6
         hidden 
-        lg:block 
+        lg:flex 
         px-4
         py-2
         rounded-full
-        bg-sky-500
-        hover:bg-opacity-90 
         cursor-pointer
+        hover:bg-slate-300 
+        hover:bg-opacity-10
       "
       >
-        <p
-          className="
-            hidden 
-            lg:block 
-            text-center
-            font-semibold
-            text-white 
-            text-[20px]
-        "
-        >
-          Tweet
-        </p>
+        <div>
+          <Avatar userId={currentUser?.id} />
+        </div>
+        <div className="flex flex-col ml-1">
+          <p className="text-white text-sm font-semibold w-30 truncate">
+            {currentUser?.name}
+          </p>
+          <p className="text-white/50 text-sm truncate">
+            @{currentUser?.username}
+          </p>
+        </div>
+        <div className="flex items-center justify-center">
+          <IoIosMore size={20} color="white" />
+        </div>
       </div>
     </div>
   )
 }
 
-export default SidebarTweetButton
+export default SidebarProfileWidget

@@ -1,12 +1,12 @@
-import useUsers from '@/hooks/useUsers';
+import useUsers from "@/hooks/useUsers"
 
-import Avatar from '../Avatar';
+import Avatar from "../Avatar"
 
 const FollowBar = () => {
-  const { data: users = [] } = useUsers();
+  const { data: users = [] } = useUsers()
 
   if (users.length === 0) {
-    return null;
+    return null
   }
 
   return (
@@ -16,7 +16,9 @@ const FollowBar = () => {
         <div className="flex flex-col gap-6 mt-4">
           {users.map((user: Record<string, any>) => (
             <div key={user.id} className="flex flex-row gap-4">
-              <Avatar userId={user.id} />
+              <div>
+                <Avatar userId={user.id} />
+              </div>
               <div className="flex flex-col">
                 <p className="text-white font-semibold text-sm">{user.name}</p>
                 <p className="text-neutral-400 text-sm">@{user.username}</p>
@@ -26,7 +28,7 @@ const FollowBar = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default FollowBar;
+export default FollowBar
