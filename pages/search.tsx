@@ -10,7 +10,7 @@ const Search = () => {
       <Header label="Search" />
       <div>
         <p className="text-lg font-semibold text-white/50 p-4">
-          No results found for "{q}"
+          No results found for &quot;{q}&quot;
         </p>
       </div>
     </>
